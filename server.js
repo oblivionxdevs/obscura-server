@@ -1,5 +1,6 @@
 const express = require('express');
 const crypto = require('crypto');
+const cors = require('cors');
 const https = require('https');
 const app = express();
 
