@@ -1,5 +1,5 @@
 {
-  "name": "obscura-api",
+  "name": "obscura-server",
   "version": "1.0.0",
   "description": "Auth API for Obscura Premium",
   "main": "server.js",
@@ -7,6 +7,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
   }
 }
