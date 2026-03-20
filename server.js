@@ -7,6 +7,10 @@ const db = {
     keys: {} 
 };
 
+app.get('/', (req, res) => {
+    res.send('Obscura Auth Server is Online');
+});
+
 app.get('/generate', (req, res) => {
     const newKey = `OBS-${crypto.randomBytes(4).toString('hex').toUpperCase()}-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
     
