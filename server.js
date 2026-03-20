@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const https = require('https');
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 // CONFIGURATION - CHANGE THESE
