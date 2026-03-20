@@ -1,6 +1,7 @@
 const express = require('express');
 const crypto = require('crypto');
 const app = express();
+const ADMIN_PASSWORD = "qwertyuiopasdfghjklzxcvbnm11111!!!!";
 app.use(express.json());
 
 const db = {
@@ -11,15 +12,17 @@ app.get('/', (req, res) => {
     res.send('Obscura Auth Server is Online');
 });
 
-app.get('/generate', (req, res) => {
-    const newKey = `OBS-${crypto.randomBytes(4).toString('hex').toUpperCase()}-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
-    
-    db.keys[newKey] = {
-        hwid: null,
-        status: "unused",
-        created: new Date().toISOString()
-    };
 
+
+app.get('/generate', (req, res) => {
+    const auth = req.query.admin_key;
+
+    if (auth !== ADMIN_PASSWORD) {
+        return res.status(403).json({ success: false, message: "Unauthorized" });
+    }
+
+    const newKey = `OBS-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
+    db.keys[newKey] = { hwid: null, status: "unused" };
     res.json({ success: true, key: newKey });
 });
 
